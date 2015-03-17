@@ -1,0 +1,9 @@
+[
+       { "machine": "cubieboard", "version": "2.0.0", "type": "stable", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "2.99.0", "type": "unstable", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "3.0.0-beta.1", "type": "testing", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "3.0.0-beta.2", "type": "testing", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "3.0.0-rc.1", "type": "testing", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "3.0.0", "type": "stable", "url": "http://calaos.fr/..."},
+       { "machine": "cubieboard", "version": "4.0.0-rc1", "type": "testing", "url": "http://calaos.fr/..."}
+]
