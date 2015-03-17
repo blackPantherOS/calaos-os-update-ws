@@ -1,0 +1,25 @@
+{
+  "name": "calaos-os-update-ws",
+  "version": "1.0.0",
+  "description": "Calaos OS Update webservice",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/calaos/calaos-os-update-ws.git"
+  },
+  "keywords": [
+    "Calaos",
+    "webservice",
+    "update",
+    "OTA"
+  ],
+  "author": "Nicolas Aguirre",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/calaos/calaos-os-update-ws/issues"
+  },
+  "homepage": "https://github.com/calaos/calaos-os-update-ws"
+}
