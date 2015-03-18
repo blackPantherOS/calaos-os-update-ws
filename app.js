@@ -1,7 +1,5 @@
-var fs = require('fs');
 var express = require('express');
 var app = express();
-var semver = require('semver');
 var versions = require('./versions.json');
 
 app.get('/update', function(req, res) {
@@ -14,34 +12,53 @@ app.get('/update', function(req, res) {
     console.log("Parameter: " + version);
     console.log("Parameter: " + type);
 
-    if (!type)
-        type = "stable"
 
-    var v = new Object();
-    v.version = version;
-    for(var index in versions) {
-        if (machine == versions[index].machine &&
-            semver.gt(versions[index].version, v.version))
+    var findMaxStable = function(object, type)
+    {
+    var max = "";
+    var k;
+    for (var key in object) {
+        if(object[key].version > max)
+        {
+            if (type == "stable" && object[key].version.search("beta") == -1  && object[key].version.search("rc")  == -1 && object[key].version.search(".99")  == -1)
             {
-
-                //console.log(versions[index], type, versions[index].version.search("beta"), versions[index].version.search("rc"));
-
-                if (type == "testing" || ( type == "stable" && versions[index].version.search("beta") == -1 &&
-                                                               versions[index].version.search("rc") == -1))
-                {
-                    v = versions[index];
-                    console.log(v);
-                }
+                //console.log(object[key].version, max)
+                max = object[key].version;
+                k = key;
             }
+            else if (type != "stable")
+            {
+                //console.log(object[key].version, max)
+                max = object[key].version;
+                k = key;
+            }
+        }
     }
 
-    //var url = "http://calaos.fr/download/" + type + "/calaos_os/";
+    if (max != 0)
+        return k;
+    }
+
+
+
+    var max = findMaxStable(versions, type)
+    v1 = versions[max]
+
+    if (type != "stable")
+    {
+        var max = findMaxStable(versions, "stable")
+        v2 = versions[max]
+        if (v1.version.search(v2.version) != -1)
+            v1 = v2
+    }
+
+    console.log(v1);
 
 
     update = new Object();
     update.machine = machine;
     update.url = "test";
-    update.version = v;
+    update.version = v1;
 
 
     res.json(update);
