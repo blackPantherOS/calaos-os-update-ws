@@ -22,13 +22,11 @@ app.get('/update', function(req, res) {
         {
             if (type == "stable" && object[key].version.search("beta") == -1  && object[key].version.search("rc")  == -1 && object[key].version.search(".99")  == -1)
             {
-                //console.log(object[key].version, max)
                 max = object[key].version;
                 k = key;
             }
             else if (type != "stable")
             {
-                //console.log(object[key].version, max)
                 max = object[key].version;
                 k = key;
             }
