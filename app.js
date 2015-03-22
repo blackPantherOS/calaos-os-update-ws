@@ -12,55 +12,103 @@ app.get('/update', function(req, res) {
     console.log("Parameter: " + version);
     console.log("Parameter: " + type);
 
-
-    var findMaxStable = function(object, type)
+    var findMaxStable = function(object, machine)
     {
-    var max = "";
-    var k;
-    for (var key in object) {
-        if(object[key].version > max)
-        {
-            if (type == "stable" && object[key].version.search("beta") == -1  && object[key].version.search("rc")  == -1 && object[key].version.search(".99")  == -1)
+        var max = "";
+        var k = -1;
+        for (var key in object) {
+
+            if(object[key].machine == machine && object[key].version > max)
             {
-                max = object[key].version;
-                k = key;
-            }
-            else if (type != "stable")
-            {
-                max = object[key].version;
-                k = key;
+                if (object[key].version.search("beta") == -1  && object[key].version.search("rc")  == -1 && object[key].version.search(".99")  == -1)
+                {
+                    max = object[key].version;
+                    k = key;
+                }
             }
         }
+        return k;
     }
 
-    if (max != 0)
+
+    var findMaxTesting = function(object, machine)
+    {
+        var max = "";
+        var k = -1;
+        for (var key in object) {
+            if(object[key].machine == machine && object[key].version > max)
+            {
+                    max = object[key].version;
+                    k = key;
+            }
+        }
+
         return k;
     }
 
 
 
-    var max = findMaxStable(versions, type)
-    v1 = versions[max]
+    var idx = findMaxStable(versions, machine)
+    stable = versions[idx]
+    console.log("Latest stable version : " + stable.version)
+    idx = findMaxTesting(versions, machine)
+    testing = versions[idx]
+    console.log("Latest testing version : " + testing.version)
 
-    if (type != "stable")
+    if (testing.version.search(stable.version) != -1)
     {
-        var max = findMaxStable(versions, "stable")
-        v2 = versions[max]
-        if (v1.version.search(v2.version) != -1)
-            v1 = v2
+        testing = stable
+        console.log("Testing contains stable, Latest testing version is" + stable.version)
     }
 
-    console.log(v1);
+    if (type == "stable")
+    {
+        if (stable.version == version)
+        {
+            v = {status: "no new version"}
+            console.log("Stable version == checked version." + stable.status)
+        }
+        else
+        {
+            v = stable
+        }
+    }
+    else if (type == "testing")
+    {
+        if (version.search("beta") == -1  && version.search("rc")  == -1 && version.search(".99")  == -1)
+        {
+            if (version > stable.version)
+            {
+                v =  {status: "no new version"}
+            }
+            else
+            {
+                console.log("HEEEEEEERRRRRRE")
+                v = testing
+            }
+        }
+        else
+        {
+            console.log("compare " + version + "and " + "testing.version")
+            if (version >= testing.version)
+            {
+                v =  {status: "no new version"}
+            }
+            else
+            {
+                v = testing
+            }
+        }
+    }
 
+    console.log(v);
 
     update = new Object();
-    update.machine = machine;
-    update.url = "test";
-    update.version = v1;
-
+    update = v;
 
     res.json(update);
+
 });
 
-
+console.log("Calaos Versions WebService : http://127.0.0.1:8428")
 app.listen(process.env.PORT || 8428);
