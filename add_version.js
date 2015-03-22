@@ -11,7 +11,7 @@ if (arguments.length != 4) {
     console.log("Usage: " + process.argv[0] + ' ' + process.argv[1] + " MACHINE version type url")
     console.log("\tMACHINE: raspberrypi, cubieboard ...")
     console.log("\tversion: v2.0, v2.0-beta1, ...")
-    console.log("\t   type: stable or unstable")
+    console.log("\t   type: stable or testing")
     console.log("\t    url: url where to download the image of this version")
     process.exit(1);
 }
