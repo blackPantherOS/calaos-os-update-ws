@@ -1,17 +1,86 @@
 [
-
-       { "machine": "cubieboard", "version": "v2.0-beta1-0", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.0-beta2-2", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.0-rc1-9", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.0-rc2-4", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.0", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.1-rc1-9", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.1", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v2.99-4", "type": "unstable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v3.0-beta1-4", "type": "testing", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v3.0-beta2-0", "type": "testing", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v3.0-rc1-4", "type": "testing", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v3.0", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v3.99", "type": "stable", "url": "http://calaos.fr/..."},
-       { "machine": "cubieboard", "version": "v4.0-rc1-0", "type": "testing", "url": "http://calaos.fr/..."}
+    {
+        "machine": "raspberrypi",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/raspberrypi/calaos-image-raspberrypi-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "cubieboard2",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/cubieboard2/calaos-image-cubieboard2-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "meleg",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/meleg/calaos-image-meleg-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "nuc",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/nuc/calaos-image-nuc-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "mele",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/mele/calaos-image-mele-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "cubieboard",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/cubieboard/calaos-image-cubieboard-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "n450",
+        "version": "v2.0-rc2-0-g4eb85a1",
+        "type": "testing",
+        "url": "http://calaos.fr/download/testing/calaos-os/n450/calaos-image-n450-v2.0-rc2-0-g4eb85a1-2015-01-06.tar.xz"
+    },
+    {
+        "machine": "raspberrypi",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/raspberrypi/calaos-image-raspberrypi-v2.0.tar.xz"
+    },
+    {
+        "machine": "cubieboard2",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/cubieboard2/calaos-image-cubieboard2-v2.0.tar.xz"
+    },
+    {
+        "machine": "meleg",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/meleg/calaos-image-meleg-v2.0.tar.xz"
+    },
+    {
+        "machine": "nuc",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/nuc/calaos-image-nuc-v2.0.tar.xz"
+    },
+    {
+        "machine": "mele",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/mele/calaos-image-mele-v2.0.tar.xz"
+    },
+    {
+        "machine": "cubieboard",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/cubieboard/calaos-image-cubieboard-v2.0.tar.xz"
+    },
+    {
+        "machine": "n450",
+        "version": "v2.0",
+        "type": "stable",
+        "url": "http://calaos.fr/download/stable/calaos-os/n450/calaos-image-n450-v2.0.tar.xz"
+    }
 ]
