@@ -48,59 +48,69 @@ app.get('/update', function(req, res) {
 
 
 
-    var idx = findMaxStable(versions, machine)
-    stable = versions[idx]
-    console.log("Latest stable version : " + stable.version)
-    idx = findMaxTesting(versions, machine)
-    testing = versions[idx]
-    console.log("Latest testing version : " + testing.version)
+    var idx_stable = findMaxStable(versions, machine)
+    var idx_testing = findMaxTesting(versions, machine)
 
-    if (testing.version.search(stable.version) != -1)
+    if (idx_stable == -1 && idx_testing == -1)
     {
-        testing = stable
-        console.log("Testing contains stable, Latest testing version is" + stable.version)
+        v =  {status: "no new version"}
     }
+    else
+    {
 
-    if (type == "stable")
-    {
-        if (stable.version == version)
+        stable = versions[idx_stable]
+        testing = versions[idx_testing]
+        console.log("Latest stable version : " + stable.version)
+
+        console.log("Latest testing version : " + testing.version)
+
+        if (testing.version.search(stable.version) != -1)
         {
-            v = {status: "no new version"}
-            console.log("Stable version == checked version." + stable.status)
+            testing = stable
+            console.log("Testing contains stable, Latest testing version is" + stable.version)
         }
-        else
+
+        if (type == "stable")
         {
-            v = stable
-        }
-    }
-    else if (type == "testing")
-    {
-        if (version.search("beta") == -1  && version.search("rc")  == -1 && version.search(".99")  == -1)
-        {
-            if (version > stable.version)
+            if (stable.version == version)
             {
-                v =  {status: "no new version"}
+                v = {status: "no new version"}
+                console.log("Stable version == checked version." + stable.status)
             }
             else
             {
-                console.log("HEEEEEEERRRRRRE")
-                v = testing
+                v = stable
             }
         }
-        else
+        else if (type == "testing")
         {
-            console.log("compare " + version + "and " + "testing.version")
-            if (version >= testing.version)
+            if (version.search("beta") == -1  && version.search("rc")  == -1 && version.search(".99")  == -1)
             {
-                v =  {status: "no new version"}
+                if (version > stable.version)
+                {
+                    v =  {status: "no new version"}
+                }
+                else
+                {
+                    console.log("HEEEEEEERRRRRRE")
+                    v = testing
+                }
             }
             else
             {
-                v = testing
+                console.log("compare " + version + "and " + "testing.version")
+                if (version >= testing.version)
+                {
+                    v =  {status: "no new version"}
+                }
+                else
+                {
+                    v = testing
+                }
             }
         }
-    }
 
+    }
     console.log(v);
 
     update = new Object();
