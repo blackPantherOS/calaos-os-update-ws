@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var versions = require('./versions.json');
 
-app.get('/update', function(req, res) {
+app.get('/', function(req, res) {
     res.type('application/json');
     var machine = req.query.machine
     var version = req.query.version;
