@@ -8,6 +8,13 @@ app.get('/', function(req, res) {
     var version = req.query.version
     var type = req.query.type
 
+    if (version.charAt(0) != 'v')
+    {
+	console.log("malformed version, should begin with 'v'");
+	res.status(500).send('malformed version, should begin with v');
+	return
+    }
+
     versions = require('./versions.json')
     
     console.log("Parameter: " + machine)
@@ -69,23 +76,25 @@ app.get('/', function(req, res) {
         console.log("Latest stable version : " + stable.version)
         console.log("Latest testing version : " + testing.version)
 
-	/* if testing version contains stable version e.g v2.0-beta1-X-SHA1 contains v2.0, the most recent version is the stable one */
-        if (testing.version.search(stable.version) != -1)
-        {
-	    type = "stable"
-            testing = stable
-            console.log("Testing contains stable, Latest testing version is " + stable.version)
-        }
-
 	/* Stable */
         if (type == "stable")
         {
 	    /* we asked for a version which is the most recent stable, no reason to update */
-            if (stable.version == version)
+            if (version > stable.version)
             {
-                v = {status: "noupdate"}
-                console.log("Stable version == checked version." + stable.status)
+		/* if testing version contains stable version e.g v2.0-beta1-X-SHA1 contains v2.0, the most recent version is the stable one */
+		if (testing.version.search(stable.version) != -1)
+		{
+                    v = {status: "noupdate"}                  
+		}
+		else
+		    v = {status: "update", version: stable}
+	
             }
+	    else if (version == stable.version)
+	    {
+		v = {status: "noupdate"}
+	    }
 	    /* We return the most recent stable version */
             else
             {
@@ -95,7 +104,7 @@ app.get('/', function(req, res) {
 	/* testing */
         else if (type == "testing")
         {
-	    /* the current version is not a stable version */
+	    /* the current version is a stable version */
             if (version.search("beta") == -1  && version.search("rc")  == -1 && version.search(".99")  == -1)
             {
 		/* And  is greater or equal to the most recent stable version, returns no update */ 
@@ -113,14 +122,19 @@ app.get('/', function(req, res) {
             {
                 console.log("compare " + version + "and " + testing.version)
 		/* current version is greater or equal to the most recent testing version, returns no update */
-                if (testing.version.search(version) != -1 && version >= testing.version)
+                if (version >= testing.version)
                 {
                     v = {status: "noupdate"}
                 }
 		/* Else returns the most recent testing revision */
                 else
                 {
-                    v = {status: "update", version: testing}
+		    if (testing.version.search(stable.version) != -1)
+		    {
+			v = {status: "update", version: stable}                  
+		    }
+		    else
+			v = {status: "update", version: testing}
                 }
             }
         }
@@ -136,7 +150,6 @@ app.get('/', function(req, res) {
     update = new Object()
     update = v
     res.json(update)
-
 });
 
 console.log("Calaos Versions WebService : http://127.0.0.1:8428")
