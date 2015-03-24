@@ -67,7 +67,7 @@ app.get('/update', function(req, res) {
         if (testing.version.search(stable.version) != -1)
         {
             testing = stable
-            console.log("Testing contains stable, Latest testing version is" + stable.version)
+            console.log("Testing contains stable, Latest testing version is " + stable.version)
         }
 
         if (type == "stable")
@@ -92,14 +92,13 @@ app.get('/update', function(req, res) {
                 }
                 else
                 {
-                    console.log("HEEEEEEERRRRRRE")
                     v = testing
                 }
             }
             else
             {
-                console.log("compare " + version + "and " + "testing.version")
-                if (version >= testing.version)
+                console.log("compare " + version + "and " + testing.version)
+                if (testing.version.search(version) != -1 && version >= testing.version)
                 {
                     v =  {status: "no new version"}
                 }
