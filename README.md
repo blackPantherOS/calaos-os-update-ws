@@ -22,7 +22,7 @@ node app.js
 ```
 npm install supertest
 npm install assert
-npm isntall -g mocha
+npm install -g mocha
 ```
 
 2. run the test suite
