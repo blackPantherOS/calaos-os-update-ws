@@ -153,6 +153,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/versions', function(req, res) {
+    versions = require('./versions.json')
     res.type('application/json');
     res.json(versions);
 });
