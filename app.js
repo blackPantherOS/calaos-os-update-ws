@@ -4,16 +4,15 @@ var versions = []
 
 app.get('/', function(req, res) {
     res.type('application/json');
-    var vquery = req.query.versions
+
     var machine = req.query.machine
     var version = req.query.version
     var type = req.query.type
 
     versions = require('./versions.json')
     
-    if (vquery)
+    if (req.param('versions'))
     {
-        versions = require('./versions.json')
         res.type('application/json');
         res.json(versions);
         return;
