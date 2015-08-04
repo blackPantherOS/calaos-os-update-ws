@@ -152,5 +152,10 @@ app.get('/', function(req, res) {
     res.json(update)
 });
 
+app.get('/versions', function(req, res) {
+    res.type('application/json');
+    res.json(versions);
+});
+
 console.log("Calaos Versions WebService : http://127.0.0.1:8428")
 app.listen(process.env.PORT || 8428)
