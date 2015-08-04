@@ -4,18 +4,27 @@ var versions = []
 
 app.get('/', function(req, res) {
     res.type('application/json');
+    var vquery = req.query.versions
     var machine = req.query.machine
     var version = req.query.version
     var type = req.query.type
 
+    versions = require('./versions.json')
+    
+    if (vquerry)
+    {
+        versions = require('./versions.json')
+        res.type('application/json');
+        res.json(versions);
+        return;
+    }
+    
     if (version.charAt(0) != 'v')
     {
 	console.log("malformed version, should begin with 'v'");
 	res.status(500).send('malformed version, should begin with v');
 	return
-    }
-
-    versions = require('./versions.json')
+    }xs
     
     console.log("Parameter: " + machine)
     console.log("Parameter: " + version)
@@ -150,12 +159,6 @@ app.get('/', function(req, res) {
     update = new Object()
     update = v
     res.json(update)
-});
-
-app.get('/versions', function(req, res) {
-    versions = require('./versions.json')
-    res.type('application/json');
-    res.json(versions);
 });
 
 console.log("Calaos Versions WebService : http://127.0.0.1:8428")
