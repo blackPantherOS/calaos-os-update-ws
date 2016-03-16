@@ -10,21 +10,21 @@ app.get('/', function(req, res) {
     var type = req.query.type
 
     versions = require('./versions.json')
-    
+
     if (req.query['versions'])
     {
         res.type('application/json');
         res.json(versions);
         return;
     }
-    
+
     if (version.charAt(0) != 'v')
     {
 	console.log("malformed version, should begin with 'v'");
 	res.status(500).send('malformed version, should begin with v');
 	return
-    }xs
-    
+    }
+
     console.log("Parameter: " + machine)
     console.log("Parameter: " + version)
     console.log("Parameter: " + type)
@@ -80,7 +80,7 @@ app.get('/', function(req, res) {
 	/* Get the stable and testing json object */
         stable = versions[idx_stable]
         testing = versions[idx_testing]
-	
+
         console.log("Latest stable version : " + stable.version)
         console.log("Latest testing version : " + testing.version)
 
@@ -93,11 +93,11 @@ app.get('/', function(req, res) {
 		/* if testing version contains stable version e.g v2.0-beta1-X-SHA1 contains v2.0, the most recent version is the stable one */
 		if (testing.version.search(stable.version) != -1)
 		{
-                    v = {status: "noupdate"}                  
+                    v = {status: "noupdate"}
 		}
 		else
 		    v = {status: "update", version: stable}
-	
+
             }
 	    else if (version == stable.version)
 	    {
@@ -115,7 +115,7 @@ app.get('/', function(req, res) {
 	    /* the current version is a stable version */
             if (version.search("beta") == -1  && version.search("rc")  == -1 && version.search(".99")  == -1)
             {
-		/* And  is greater or equal to the most recent stable version, returns no update */ 
+		/* And  is greater or equal to the most recent stable version, returns no update */
                 if (version >= stable.version)
                 {
                     v = {status: "noupdate"}
@@ -139,7 +139,7 @@ app.get('/', function(req, res) {
                 {
 		    if (testing.version.search(stable.version) != -1)
 		    {
-			v = {status: "update", version: stable}                  
+			v = {status: "update", version: stable}
 		    }
 		    else
 			v = {status: "update", version: testing}
@@ -152,7 +152,7 @@ app.get('/', function(req, res) {
 	    v = {status: "noupdate"}
         }
     }
-    
+
     //console.log(v);
     /* returns the object */
     update = new Object()
