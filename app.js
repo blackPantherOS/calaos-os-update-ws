@@ -11,7 +11,7 @@ app.get('/', function(req, res) {
 
     versions = require('./versions.json')
     
-    if (req.param('versions'))
+    if (req.query['versions'])
     {
         res.type('application/json');
         res.json(versions);
